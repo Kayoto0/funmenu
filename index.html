@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"> 
+  <title> Menu</title>
+    <!-- The CSS and JS file must be declared after the things above-->
+    <link rel="stylesheet" href="style.css"/>
+    
+  <style>
+    
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #ffccff; /* Light pink background */
+}
+
+h1 {
+  text-align: center;
+  color: #ff69b4; /* Pink title color */
+}
+
+#chat-container {
+  border: 1px solid #ff69b4; /* Pink border for chat container */
+  padding: 10px;
+  height: 300px;
+  overflow-y: scroll;
+  background-color: #fff; /* White background for chat container */
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px #888888;
+}
+
+form {
+  margin-top: 20px;
+}
+
+input[type="text"] {
+  width: 70%;
+  padding: 5px;
+  border: 2px solid #ff69b4; /* Pink border for the input field */
+  border-radius: 20px;
+}
+
+button {
+  padding: 5px 10px;
+  margin-left: 10px;
+  background-color: #ff69b4; /* Pink background color for the button */
+  border: none;
+  border-radius: 20px;
+  color: #fff; /* White text color */
+  cursor: pointer;
+}
+
+#name-changer {
+  margin-top: 10px;
+}
+
+#name-changer:hover {
+  background-color: #ff1493; /* Darker pink on hover */
+}
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    #chat-container {
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 300px;
+      overflow-y: scroll;
+    }
+    
+    form {
+      margin-top: 20px;
+    }
+    
+    input[type="text"] {
+      width: 70%;
+      padding: 5px;
+    }
+    
+    button {
+      padding: 5px 10px;
+      margin-left: 10px;
+    }
+    
+    #name-changer {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="chat-container"></div>
+  
+  <form id="message-form">
+    <input type="text" id="message-input" placeholder="Enter your message..." />
+    <button type="submit">Send</button>
+  </form>
+  
+  <button id="name-changer">Change Name</button>
+  
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    let userName = localStorage.getItem('userName');
+
+    // Display a message in the chat container
+    function displayMessage(message) {
+      const chatContainer = document.getElementById('chat-container');
+      const messageElement = document.createElement('p');
+      messageElement.textContent = message;
+      chatContainer.appendChild(messageElement);
+    }
+
+    // Function to handle sending a message
+    function sendMessage(event) {
+      event.preventDefault();
+      const messageInput = document.getElementById('message-input');
+      const message = messageInput.value;
+
+      // Send the message to the server
+      socket.emit('message', message);
+
+      // Clear the input field
+      messageInput.value = '';
+    }
+
+    // Add an event listener to the message form
+    const messageForm = document.getElementById('message-form');
+    messageForm.addEventListener('submit', sendMessage);
+
+    // Display a message when a user joins the chat
+    socket.on('userJoin', (name) => {
+      displayMessage(`${name} has joined the chat.`);
+    });
+
+    // Display a message when a user leaves the chat
+    socket.on('userLeave', (name) => {
+      displayMessage(`${name} has left the chat.`);
+    });
+
+    // Display a message when a user changes their username
+    socket.on('userChange', (data) => {
+      const { prevUserName, newUserName } = data;
+      displayMessage(`${prevUserName} has changed their username to ${newUserName}.`);
+    });
+
+    // Display received messages
+    socket.on('message', (data) => {
+      const { user, message } = data;
+      displayMessage(`${user}: ${message}`);
+    });
+
+    // Function to handle changing the user's name
+    function changeName() {
+      const newUserName = prompt('Enter your new name:');
+
+      if (newUserName) {
+        // Display a message in the chat container
+        displayMessage(`${userName} has changed their username to ${newUserName}.`);
+
+        // Update the user's name
+        userName = newUserName;
+
+        // Notify the server of the name change
+        socket.emit('join', userName);
+
+        // Save the username in localStorage
+        localStorage.setItem('userName', userName);
+      }
+    }
+
+    // Add an event listener to the name changer button
+    const nameChanger = document.getElementById('name-changer');
+    nameChanger.addEventListener('click', changeName);
+
+    // Prompt the user to set their name if not already stored
+    if (!userName) {
+      userName = prompt('Please enter your name:');
+      localStorage.setItem('userName', userName);
+    }
+
+    socket.emit('join', userName);
+
+    
+  </script>
+
+        
+<div class="navigation">
+    <ul>
+      <li class="list active">
+        <a href="https://kayoto0.github.io/home/" target="blank">
+          <span class="icon">
+            <ion-icon name="home"></ion-icon>
+          </span>
+          <span class="text">Home</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="heart"></ion-icon>
+          </span>
+          <span class="text">Love</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="https://youtube.com" target="blank">
+          <span class="icon">
+            <ion-icon name="chatbubbles"></ion-icon>
+          </span>
+          <span class="text">Chat</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="https://kayoto0.github.io/listpass/" target="blank">
+          <span class="icon">
+            <ion-icon name="list-circle"></ion-icon>
+          </span>
+          <span class="text">To Do List</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="https://kayoto0.github.io/fun/" target="blank">
+          <span class="icon">
+            <ion-icon name="game-controller"></ion-icon>
+          </span>
+          <span class="text">Fun</span>
+        </a>
+      </li>
+      <div class="indicator"></div>
+    </ul>
+  </div>
+  <script>
+    const list= document.querySelectorAll('.list');
+    function activeLink(){
+      list.forEach((item) =>
+      item.classList.remove('active'));
+      this.classList.add('active');
+    }
+    list.forEach((item) =>
+    item.addEventListener('click',activeLink));
+   </script>
+   
+   <div class="gamenavigation">
+    <ul>
+      <!-- Add 15 more list items for a total of 20 -->
+      <li class="list active">
+        <a href="https://kayoto0.github.io/fun/" target="blank">
+          <span class="icon">
+            <ion-icon name="fast-food"></ion-icon>
+          </span>
+          <span class="text">Snake</span>
+        </a>
+      </li>
+      <li class="">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="diamond"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="chatbubbles"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="list-circle"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="game-controller"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      
+      <li class="">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="heart"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="chatbubbles"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="list-circle"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="game-controller"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      
+      <li class="">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="heart"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="chatbubbles"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="list-circle"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="game-controller"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="game-controller"></ion-icon>
+          </span>
+          <span class="text">Fun</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="game-controller"></ion-icon>
+          </span>
+          <span class="text">Fun</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="game-controller"></ion-icon>
+          </span>
+          <span class="text">Fun</span>
+        </a>
+      </li>
+      
+      <!-- Repeat the above list item structure for the remaining 15 icons -->
+      <!-- Make sure to change the URLs, icon names, and text accordingly -->
+      <div class="indicator"></div>
+    </ul>
+  </div>
+  
+   
+  
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js">;
+    </script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js">;
+  
+
+
+  <body>
+  </body>
+
+ 
+
+    </script>
+  </script>
+  </body>
+  </html>
+  
+</body>
+</html>
