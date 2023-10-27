@@ -169,8 +169,7 @@ body
     position: absolute; /* Fixed position so it stays at the top */
     top: 0;
     display: flex;
-    justify-content: center; /* Center items horizontally */
-    align-items: center;
+    justify-content: left; /* Center items horizontally */
     border-radius: 0px;
     z-index: 1; /* Add a high z-index to keep it on top */
     overflow-y: scroll; /* Enable vertical scrolling when content exceeds max-height */
