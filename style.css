@@ -417,3 +417,10 @@ body {
 }
 
 /* Add more styles for additional list items as needed */
+/* Add this media query to adjust the chat box width on mobile devices */
+@media (max-width: 768px) {
+    #chat-container {
+      width: 90%; /* Adjust the width to your preference */
+    }
+  }
+  
