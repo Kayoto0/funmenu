@@ -166,14 +166,14 @@ body
     width: 100%; /* Take the full width of the page */
     max-height: 70px; /* Set the maximum height for the navigation bar */
     background: rgb(255, 120, 154);
-    position: fixed; /* Fixed position so it stays at the top */
+    position: absolute; /* Fixed position so it stays at the top */
     top: 0;
     display: flex;
     justify-content: center; /* Center items horizontally */
     align-items: center;
-    border-radius: 10px;
-    z-index: 999; /* Add a high z-index to keep it on top */
-    overflow-y: auto; /* Enable vertical scrolling when content exceeds max-height */
+    border-radius: 0px;
+    z-index: 1; /* Add a high z-index to keep it on top */
+    overflow-y: scroll; /* Enable vertical scrolling when content exceeds max-height */
 }
 
 
@@ -315,6 +315,18 @@ body
 .gamenavigation ul li:nth-child(14).active ~ .indicator,
 .gamenavigation ul li:nth-child(14):hover ~ .indicator {
     transform: translateX(calc(60px * 13));
+}
+.gamenavigation ul li:nth-child(15).active ~ .indicator,
+.gamenavigation ul li:nth-child(15):hover ~ .indicator {
+    transform: translateX(calc(60px * 14));
+}
+.gamenavigation ul li:nth-child(16).active ~ .indicator,
+.gamenavigation ul li:nth-child(16):hover ~ .indicator {
+    transform: translateX(calc(60px * 15));
+}
+.gamenavigation ul li:nth-child(17).active ~ .indicator,
+.gamenavigation ul li:nth-child(17):hover ~ .indicator {
+    transform: translateX(calc(60px * 16));
 }
 /* Add styles for additional list items as needed */
 
