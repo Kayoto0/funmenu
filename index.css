@@ -41,8 +41,8 @@ body
     width: 60px;
     height: 400px;
     background: #ff5982;
-    position: absolute;
-    right: 20px; /* Add a margin from the right side */
+    position: fixed;
+    right: 0%; /* Add a margin from the right side */
     top: 50%; /* Vertically align to the center */
     transform: translateY(-50%); /* Correct for vertical alignment */
     display: flex;
