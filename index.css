@@ -219,7 +219,7 @@ body
 }
 
 .gamenavigation ul li a .icon {
-    font-size: 1.5em;
+    font-size: 2.5em;
     transition: 0.5s;
     transform: translateY(3px); /* Shift icons down by 3 pixels */
 }
