@@ -1,88 +1,240 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - youtube.com/codingnepal -->
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Drawing App JavaScript | CodingNepal</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=0">
-    <script src="script.js" defer></script>
-  </head>
-  <body>
-    <div class="container">
-      <section class="tools-board">
-        <div class="row">
-          <label class="title">Shapes</label>
-          <ul class="options">
-            <li class="option tool" id="rectangle">
-              <img src="icons/rectangle.svg" alt="">
-              <span>Rectangle</span>
-            </li>
-            <li class="option tool" id="circle">
-              <img src="icons/circle.svg" alt="">
-              <span>Circle</span>
-            </li>
-            <li class="option tool" id="triangle">
-              <img src="icons/triangle.svg" alt="">
-              <span>Triangle</span>
-            </li>
-            <li class="option">
-              <input type="checkbox" id="fill-color">
-              <label for="fill-color">Fill color</label>
-            </li>
-          </ul>
-        </div>
-        <div class="row">
-          <label class="title">Options</label>
-          <ul class="options">
-            <li class="option active tool" id="brush">
-              <img src="icons/brush.svg" alt="">
-              <span>Brush</span>
-            </li>
-            <li class="option tool" id="eraser">
-              <img src="icons/eraser.svg" alt="">
-              <span>Eraser</span>
-            </li>
-            <li class="option">
-              <input type="range" id="size-slider" min="1" max="30" value="5">
-            </li>
-          </ul>
-        </div>
-        <div class="row colors">
-          <label class="title">Colors</label>
-          <ul class="options">
-            <li class="option"></li>
-            <li class="option selected"></li>
-            <li class="option"></li>
-            <li class="option"></li>
-            <li class="option">
-              <input type="color" id="color-picker" value="#4A98F7">
-            </li>
-          </ul>
-        </div>
-        <div class="row buttons">
-          <button class="clear-canvas">Clear Canvas</button>
-          <button class="save-img">Save As Image</button>
-        </div>
-      </section>
-      <section class="drawing-board">
-        <canvas></canvas>
-      </section>
-    </div>
-                 
-<div class="gamenavigation">
+<html lang="en" dir="ltr"> 
+
+
+
+    <head>
+        <meta charset="utf-8"> 
+        <title> Menu</title>
+            <!-- Google fonts. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Bungee Outline' rel='stylesheet'/>
+    <link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'/>
+    <!-- Use font awesome icons. -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- Use firebase app and database. -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+
+    <!-- The CSS and JS file must be declared after the things above-->
+    <link rel="stylesheet" href="index.css"/>
+    <script type="text/javascript" src="index.js"></script>
+
+
+    </head>
+    <body>
+      
+<div class="navigation">
     <ul>
       <li class="list active">
-        <a href="https://kayoto0.github.io/funmenu/" target="Forced">
+        <a href="https://kayoto0.github.io/home/" target="blank">
           <span class="icon">
-            <ion-icon name="arrow-back"></ion-icon>
-
-        </div>
+            <ion-icon name="home"></ion-icon>
+          </span>
+          <span class="text">Home</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="https://kayoto0.github.io/listpass/" target="blank">
+          <span class="icon">
+            <ion-icon name="heart"></ion-icon>
+          </span>
+          <span class="text">Love</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="https://youtube.com" target="blank">
+          <span class="icon">
+            <ion-icon name="chatbubbles"></ion-icon>
+          </span>
+          <span class="text">Chat</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="https://kayoto0.github.io/listpass/" target="blank">
+          <span class="icon">
+            <ion-icon name="list-circle"></ion-icon>
+          </span>
+          <span class="text">To Do List</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="https://kayoto0.github.io/funmenu/" target="blank">
+          <span class="icon">
+            <ion-icon name="game-controller"></ion-icon>
+          </span>
+          <span class="text">Fun</span>
+        </a>
+      </li>
+      <div class="indicator"></div>
+    </ul>
+  </div>
+  <script>
+    const list= document.querySelectorAll('.list');
+    function activeLink(){
+      list.forEach((item) =>
+      item.classList.remove('active'));
+      this.classList.add('active');
+    }
+    list.forEach((item) =>
+    item.addEventListener('click',activeLink));
+   </script>
+   
+   <div class="gamenavigation">
+    <ul>
+      <!-- Add 15 more list items for a total of 20 -->
+      <li class="list active">
+        <a href="https://kayoto0.github.io/fun/" target="blank">
+          <span class="icon">
+            <ion-icon name="fast-food"></ion-icon>
+          </span>
+          <span class="text">Snake</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="https://kayoto0.github.io/fun_tic/" target="blank">
+          <span class="icon">
+            <ion-icon name="apps-sharp"></ion-icon>
+          </span>
+          <span class="text">TicTac</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="https://kayoto0.github.io/fun_hang/" target="blank">
+          <span class="icon">
+            <ion-icon name="man"></ion-icon>
+          </span>
+          <span class="text">HangMan</span>
+        </a>
+      </li>
+      <li class="">
+        <a href="https://kayoto0.github.io/storypass/" target="blank">
+          <span class="icon">
+            <ion-icon name="diamond"></ion-icon>
+          </span>
+          <span class="text">Stories</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="https://kayoto0.github.io/fun_note_pass/" target="blank">
+          <span class="icon">
+            <ion-icon name="create-sharp"></ion-icon>
+          </span>
+          <span class="text">Notes</span>
+        </a>
+      </li>
+      
+      <li class="">
+        <a href="https://kayoto0.github.io/fun_draw/" target="blank">
+          <span class="icon">
+            <ion-icon name="pencil"></ion-icon>
+          </span>
+          <span class="text">Draw</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="chatbubbles"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="list-circle"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="game-controller"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      
+      <li class="">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="heart"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="chatbubbles"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="list-circle"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="game-controller"></ion-icon>
+          </span>
+          <span class="text">None</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="game-controller"></ion-icon>
+          </span>
+          <span class="text">Fun</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="game-controller"></ion-icon>
+          </span>
+          <span class="text">Fun</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="" target="blank">
+          <span class="icon">
+            <ion-icon name="game-controller"></ion-icon>
+          </span>
+          <span class="text">Fun</span>
+        </a>
+      </li>
+      
+      <!-- Repeat the above list item structure for the remaining 15 icons -->
+      <!-- Make sure to change the URLs, icon names, and text accordingly -->
+      <div class="indicator"></div>
+    </ul>
+  </div>
   
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js">;
-</script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js">;
+   
+  
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js">;
+    </script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js">;
+  
+
+
+  <body>
+  </body>
+
+ 
 
     </script>
+  </script>
   </body>
-</html>
+  </html>
+  
